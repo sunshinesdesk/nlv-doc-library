@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Naari Led Vyapaar — Document Library</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:#FAF6F2;color:#2C1A1A;min-height:100vh;overflow-x:hidden}
+:root{
+  --red:#E12020;--yellow:#FCE08B;--purple:#C2B1E1;--green:#C0E0C0;
+  --pink:#F4B8C8;--mauve:#D4A0C0;--dark:#2C1A1A;--cream:#FAF6F2;
+  --pale-rose:#F9E4EE;--light-gray:#F5F0F0;
+  --radius:16px;
+  --shadow:0 2px 16px rgba(44,26,26,.08);
+  --shadow-h:0 8px 32px rgba(44,26,26,.15);
+}
+.hdr{background:var(--red);padding:48px 40px 40px;text-align:center;position:relative;overflow:hidden}
+.hdr::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--pink),var(--yellow),var(--purple),var(--green),var(--mauve))}
+.hdr-eye{font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--yellow);margin-bottom:12px}
+.hdr-title{font-family:'Playfair Display',serif;font-size:clamp(34px,5vw,58px);font-weight:700;color:white;line-height:1.1;margin-bottom:10px}
+.hdr-sub{font-family:'Playfair Display',serif;font-size:clamp(15px,2.5vw,20px);font-style:italic;color:rgba(255,255,255,.8);margin-bottom:20px}
+.hdr-motto{display:inline-flex;gap:14px;background:rgba(255,255,255,.12);border-radius:50px;padding:8px 24px;font-size:13px;font-weight:500;color:white;letter-spacing:2px;text-transform:uppercase}
+.hdr-motto em{opacity:.5;font-style:normal}
+.fbar{background:white;border-bottom:1px solid #EDE8E8;padding:14px 40px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;position:sticky;top:0;z-index:50;box-shadow:0 2px 8px rgba(44,26,26,.06)}
+.flbl{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:#9E8E8E;margin-right:4px;flex-shrink:0}
+.fbtn{padding:6px 14px;border-radius:50px;border:1.5px solid #EDE8E8;background:white;font-size:12px;font-weight:500;color:#666;cursor:pointer;transition:all .18s;font-family:inherit}
+.fbtn:hover{border-color:var(--red);color:var(--red)}
+.fbtn.on{background:var(--red);border-color:var(--red);color:white}
+.fcnt{margin-left:auto;font-size:12px;color:#9E8E8E;font-weight:500;white-space:nowrap}
+.wrap{max-width:1280px;margin:0 auto;padding:40px 32px}
+.grid-h{font-family:'Playfair Display',serif;font-size:21px;font-weight:600;color:var(--dark);margin-bottom:28px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:20px}
+.card{background:white;border-radius:var(--radius);box-shadow:var(--shadow);cursor:pointer;transition:transform .22s,box-shadow .22s,border-color .22s;overflow:hidden;display:flex;flex-direction:column;border:1.5px solid transparent}
+.card:hover{transform:translateY(-4px);box-shadow:var(--shadow-h);border-color:rgba(225,32,32,.12)}
+.card.hid{display:none}
+.card-top{padding:22px 22px 14px;display:flex;align-items:flex-start;gap:14px}
+.card-ico{width:46px;height:46px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.card-meta{flex:1;min-width:0}
+.card-tag{display:inline-block;padding:3px 10px;border-radius:50px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:7px}
+.card-title{font-family:'Playfair Display',serif;font-size:16.5px;font-weight:700;color:var(--dark);line-height:1.25;margin-bottom:3px}
+.card-sub{font-size:11px;font-weight:500;color:#9E8E8E}
+.card-div{height:1px;background:#F5F0F0;margin:0 22px}
+.card-desc{padding:12px 22px 16px;font-size:13px;line-height:1.65;color:#6B5555;flex:1}
+.card-ft{padding:11px 22px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid #F5F0F0}
+.card-pages{font-size:11px;color:#B8A8A8;font-weight:500}
+.card-cta{font-size:12px;font-weight:600;color:var(--red);display:flex;align-items:center;gap:6px}
+.card-cta svg{transition:transform .2s}
+.card:hover .card-cta svg{transform:translateX(4px)}
+.overlay{display:none;position:fixed;inset:0;background:rgba(44,26,26,.6);z-index:100;backdrop-filter:blur(3px);align-items:center;justify-content:center;padding:20px}
+.overlay.open{display:flex}
+.modal{background:white;border-radius:18px;width:100%;max-width:980px;height:92vh;margin:auto;overflow:hidden;box-shadow:0 24px 64px rgba(44,26,26,.25);animation:up .28s cubic-bezier(.34,1.56,.64,1);display:flex;flex-direction:column}
+@keyframes up{from{opacity:0;transform:translateY(24px) scale(.98)}to{opacity:1;transform:none}}
+.mhdr{padding:18px 24px;display:flex;align-items:center;gap:14px;position:relative;flex-shrink:0;border-bottom:1px solid #F0EAEA}
+.mico{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.mtitles{flex:1;min-width:0;padding-right:80px}
+.mtag{display:inline-block;padding:2px 9px;border-radius:50px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:5px}
+.mtitle{font-family:'Playfair Display',serif;font-size:clamp(17px,2.5vw,21px);font-weight:700;color:var(--dark);line-height:1.2}
+.msub{font-size:12px;color:#9E8E8E;margin-top:2px;font-style:italic}
+.mactions{position:absolute;top:18px;right:20px;display:flex;gap:8px}
+.mbtn{width:36px;height:36px;border-radius:50%;background:var(--light-gray);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;flex-shrink:0;text-decoration:none}
+.mbtn:hover{background:#EDE8E8}
+.mbar{height:3px;width:100%;flex-shrink:0}
+.mbody{flex:1;min-height:0;background:#E8E2DC}
+.mbody iframe{width:100%;height:100%;border:none;display:block}
+.ftr{background:var(--dark);color:rgba(255,255,255,.6);text-align:center;padding:22px;font-size:13px;margin-top:40px}
+.ftr strong{color:var(--yellow)}
+@media(max-width:640px){
+  .hdr{padding:32px 16px 24px}
+  .fbar{padding:12px 16px}
+  .wrap{padding:24px 14px}
+  .overlay{padding:0}
+  .modal{height:100vh;border-radius:0;max-width:100%}
+  .mtitles{padding-right:50px}
+  .mhdr{padding:14px 16px}
+}
+@media(prefers-reduced-motion:reduce){.card,.modal{animation:none;transition:none}}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <p class="hdr-eye">The Legit Talks</p>
+  <h1 class="hdr-title">Naari Led Vyapaar</h1>
+  <p class="hdr-sub">Document Library — Founding Edition</p>
+  <div class="hdr-motto">Discover <em>·</em> Connect <em>·</em> Rise</div>
+</header>
+
+<div class="fbar">
+  <span class="flbl">Filter</span>
+  <button class="fbtn on" onclick="filter('all',this)">All</button>
+  <button class="fbtn" onclick="filter('Strategy',this)">Strategy</button>
+  <button class="fbtn" onclick="filter('Governance',this)">Governance</button>
+  <button class="fbtn" onclick="filter('Culture',this)">Culture</button>
+  <button class="fbtn" onclick="filter('Marketing',this)">Marketing</button>
+  <button class="fbtn" onclick="filter('Design',this)">Design</button>
+  <button class="fbtn" onclick="filter('Experience',this)">Experience</button>
+  <button class="fbtn" onclick="filter('Founders',this)">Founders</button>
+  <button class="fbtn" onclick="filter('Operations',this)">Operations</button>
+  <button class="fbtn" onclick="filter('Content',this)">Content</button>
+  <button class="fbtn" onclick="filter('Internal',this)">Internal</button>
+  <button class="fbtn" onclick="filter('Community',this)">Community</button>
+  <button class="fbtn" onclick="filter('Launch',this)">Launch</button>
+  <button class="fbtn" onclick="filter('Partnerships',this)">Partnerships</button>
+  <span class="fcnt" id="cnt">18 documents</span>
+</div>
+
+<main class="wrap">
+  <p class="grid-h">Campaign Documents</p>
+  <div class="grid" id="grid">
+    <article class="card" data-id="brand_bible" data-tag="Strategy" onclick="open_modal('brand_bible')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')open_modal('brand_bible')">
+      <div class="card-top">
+        <div class="card-ico" style="background:#FDEAEA">📖</div>
+        <div class="card-meta">
+          <span class="card-tag" style="color:#E12020;background:#FDEAEA">Strategy</span>
+          <div class="card-title">Brand Bible</div>
+          <div class="card-sub">Campaign Strategy & Brand Bible</div>
+        </div>
+      </div>
+      <div class="card-div"></div>
+      <div class="card-desc">The foundational document defining NLV's philosophy, vision, mission, campaign structure, and brand identity.</div>
+      <div class="card-ft">
+        <span class="card-pages">26 pages</span>
+        <span class="card-cta">View Document
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M7 1l6 6-6 6" stroke="#E12020" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+    </article>
+    <article class="card" data-id="appendix_a" data-tag="Governance" onclick="open_modal('appendix_a')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')open_modal('appendix_a')">
+      <div class="card-top">
+        <div class="card-ico" style="background:#F0ECF9">⚙️</div>
+        <div class="card-meta">
+          <span class="card-tag" style="color:#6B5B95;background:#F0ECF9">Governance</span>
+          <div class="card-title">Appendix A</div>
+          <div class="card-sub">Brand Framework & Governance Manual</div>
+        </div>
+      </div>
+      <div class="card-div"></div>
+      <div class="card-desc">Official standards, terminology, and guiding principles for every future campaign and partner.</div>
+      <div class="card-ft">
+        <span class="card-pages">25 pages</span>
+        <span class="card-cta">View Document
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M7 1l6 6-6 6" stroke="#6B5B95" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+    </article>
+    <article class="card" data-id="appendix_b" data-tag="Culture" onclick="open_modal('appendix_b')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')open_modal('appendix_b')">
+      <div class="card-top">
+        <div class="card-ico" style="background:#FFFBEC">🔑</div>
+        <div class="card-meta">
+          <span class="card-tag" style="color:#B8860B;background:#FFFBEC">Culture</span>
+          <div class="card-title">Appendix B</div>
+          <div class="card-sub">50 Non-Negotiable Principles</div>
+        </div>
+      </div>
+      <div class="card-div"></div>
+      <div class="card-desc">The culture, ethics, and decision framework of the movement in 50 principles.</div>
+      <div class="card-ft">
+        <span class="card-pages">17 pages</span>
+        <span class="card-cta">View Document
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M7 1l6 6-6 6" stroke="#B8860B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+    </article>
+    <article class="card" data-id="marketing_playbook" data-tag="Marketing" onclick="open_modal('marketing_playbook')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')open_modal('marketing_playbook')">
+      <div class="card-top">
+        <div class="card-ico" style="background:#EDF8ED">📣</div>
+        <div class="card-meta">
+          <span class="card-tag" style="color:#2E7D32;background:#EDF8ED">Marketing</span>
+          <div class="card-title">Marketing Playbook</div>
+          <div class="card-sub">Marketing & Execution Playbook</div>
+        </div>
+      </div>
+      <div class="card-div"></div>
+      <div class="card-desc">Actionable marketing and execution steps translating NLV philosophy into campaign operations.</div>
+      <div class="card-ft">
+        <span class="card-pages">27 pages</span>
+        <span class="card-cta">View Document
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M7 1l6 6-6 6" stroke="#2E7D32" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+    </article>
+    <article class="card" data-id="asset_blueprint" data-tag="Design" onclick="open_modal('asset_blueprint')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')open_modal('asset_blueprint')">
+      <div class="card-top">
+        <div class="card-ico" style="background:#FEF0F4">🎨</div>
+        <div class="card-meta">
+          <span class="card-tag" style="color:#C2185B;background:#FEF0F4">Design</span>
+          <div class="card-title">Asset Blueprint</div>
+          <div class="card-sub">Visual Identity & Content System</div>
+        </div>
+      </div>
+      <div class="card-div"></div>
+      <div class="card-desc">Complete visual identity system, asset library, and content design standards.</div>
+      <div class="card-ft">
+        <span class="card-pages">24 pages</span>
+        <span class="card-cta">View Document
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M7 1l6 6-6 6" stroke="#C2185B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+    </article>
+    <article class="card" data-id="founder_experience" data-tag="Experience" onclick="open_modal('founder_experience')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')open_modal('founder_experience')">
+      <div class="card-top">
+        <div class="card-ico" style="background:#FAF0F6">🗺️</div>
+        <div class="card-meta">
+          <span class="card-tag" style="color:#8B4B8B;background:#FAF0F6">Experience</span>
+          <div class="card-title">Founder Experience Blueprint</div>
+          <div class="card-sub">Designing Lifelong Ambassadors</div>
+        </div>
+      </div>
+      <div class="card-div"></div>
+      <div class="card-desc">The 10-stage founder journey designed to turn participants into lifelong community members.</div>
+      <div class="card-ft">
+        <span class="card-pages">24 pages</span>
+        <span class="card-cta">View Document
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M7 1l6 6-6 6" stroke="#8B4B8B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+    </article>
+    <article class="card" data-id="founder_charter" data-tag="Founders" onclick="open_modal('founder_charter')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')open_modal('founder_charter')">
+      <div class="card-top">
+        <div class="card-ico" style="background:#FDEAEA">🤝</div>
+        <div class="card-meta">
+          <span class="card-tag" style="color:#E12020;background:#FDEAEA">Founders</span>
+          <div class="card-title">Founder Charter</div>
+          <div class="card-sub">The Culture That Unites Us</div>
+        </div>
+      </div>
+      <div class="card-div"></div>
+      <div class="card-desc">A shared commitment document for every woman who chooses to build within this movement.</div>
+      <div class="card-ft">
+        <span class="card-pages">17 pages</span>
+        <span class="card-cta">View Document
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M7 1l6 6-6 6" stroke="#E12020" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+    </article>
+    <article class="card" data-id="sop_manual" data-tag="Operations" onclick="open_modal('sop_manual')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')open_modal('sop_manual')">
+      <div class="card-top">
+        <div class="card-ico" style="background:#F0ECF9">📋</div>
+        <div class="card-meta">
+          <span class="card-tag" style="color:#5C4D7D;background:#F0ECF9">Operations</span>
+          <div class="card-title">SOP Manual</div>
+          <div class="card-sub">Campaign Operations Handbook</div>
+        </div>
+      </div>
+      <div class="card-div"></div>
+      <div class="card-desc">Standard operating procedures for planning, executing, monitoring, and closing every campaign edition.</div>
+      <div class="card-ft">
+        <span class="card-pages">26 pages</span>
+        <span class="card-cta">View Document
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M7 1l6 6-6 6" stroke="#6B5B95" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+    </article>
+    <article class="card" data-id="welcome_kit" data-tag="Founders" onclick="open_modal('welcome_kit')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')open_modal('welcome_kit')">
+      <div class="card-top">
+        <div class="card-ico" style="background:#FFFBEC">🎁</div>
+        <div class="card-meta">
+          <span class="card-tag" style="color:#E12020;background:#FFFBEC">Founders</span>
+          <div class="card-title">Founder Welcome Kit</div>
+          <div class="card-sub">Welcome to the Movement</div>
+        </div>
+      </div>
+      <div class="card-div"></div>
+      <div class="card-desc">The complete onboarding package given to every founder joining Naari Led Vyapaar.</div>
+      <div class="card-ft">
+        <span class="card-pages">21 pages</span>
+        <span class="card-cta">View Document
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M7 1l6 6-6 6" stroke="#B8860B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+    </article>
+    <article class="card" data-id="content_bible" data-tag="Content" onclick="open_modal('content_bible')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')open_modal('content_bible')">
+      <div class="card-top">
+        <div class="card-ico" style="background:#EDF8ED">✍️</div>
+        <div class="card-meta">
+          <span class="card-tag" style="color:#B8860B;background:#EDF8ED">Content</span>
+          <div class="card-title">Content Bible</div>
+          <div class="card-sub">Storytelling System & Copy Bank</div>
+        </div>
+      </div>
+      <div class="card-div"></div>
+      <div class="card-desc">The creative framework, hook library, CTAs, reel concepts, and weekly content rhythm.</div>
+      <div class="card-ft">
+        <span class="card-pages">26 pages</span>
+        <span class="card-cta">View Document
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M7 1l6 6-6 6" stroke="#2E7D32" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+    </article>
+    <article class="card" data-id="team_handbook" data-tag="Internal" onclick="open_modal('team_handbook')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')open_modal('team_handbook')">
+      <div class="card-top">
+        <div class="card-ico" style="background:#FEF0F4">👥</div>
+        <div class="card-meta">
+          <span class="card-tag" style="color:#C2185B;background:#FEF0F4">Internal</span>
+          <div class="card-title">Internal Team Handbook</div>
+          <div class="card-sub">Team Culture & Operational Standards</div>
+        </div>
+      </div>
+      <div class="card-div"></div>
+      <div class="card-desc">Team values, roles, communication standards, checklists, and culture for the NLV team.</div>
+      <div class="card-ft">
+        <span class="card-pages">24 pages</span>
+        <span class="card-cta">View Document
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M7 1l6 6-6 6" stroke="#C2185B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+    </article>
+    <article class="card" data-id="community_playbook" data-tag="Community" onclick="open_modal('community_playbook')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')open_modal('community_playbook')">
+      <div class="card-top">
+        <div class="card-ico" style="background:#FAF0F6">🌱</div>
+        <div class="card-meta">
+          <span class="card-tag" style="color:#2E7D32;background:#FAF0F6">Community</span>
+          <div class="card-title">365-Day Community Playbook</div>
+          <div class="card-sub">Building India's Most Trusted Community</div>
+        </div>
+      </div>
+      <div class="card-div"></div>
+      <div class="card-desc">The year-round community operating system with rituals, monthly themes, and programs.</div>
+      <div class="card-ft">
+        <span class="card-pages">28 pages</span>
+        <span class="card-cta">View Document
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M7 1l6 6-6 6" stroke="#8B4B8B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+    </article>
+    <article class="card" data-id="community_ops" data-tag="Operations" onclick="open_modal('community_ops')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')open_modal('community_ops')">
+      <div class="card-top">
+        <div class="card-ico" style="background:#FDEAEA">🏠</div>
+        <div class="card-meta">
+          <span class="card-tag" style="color:#5C4D7D;background:#FDEAEA">Operations</span>
+          <div class="card-title">Community & Event Operations</div>
+          <div class="card-sub">Safe, Active & Meaningful Community</div>
+        </div>
+      </div>
+      <div class="card-div"></div>
+      <div class="card-desc">Daily, weekly, and monthly operations for managing the community and events.</div>
+      <div class="card-ft">
+        <span class="card-pages">21 pages</span>
+        <span class="card-cta">View Document
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M7 1l6 6-6 6" stroke="#E12020" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+    </article>
+    <article class="card" data-id="founder_handbook" data-tag="Founders" onclick="open_modal('founder_handbook')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')open_modal('founder_handbook')">
+      <div class="card-top">
+        <div class="card-ico" style="background:#F0ECF9">📚</div>
+        <div class="card-meta">
+          <span class="card-tag" style="color:#E12020;background:#F0ECF9">Founders</span>
+          <div class="card-title">Founder Handbook</div>
+          <div class="card-sub">Welcome to the Movement</div>
+        </div>
+      </div>
+      <div class="card-div"></div>
+      <div class="card-desc">Comprehensive guide for founders — journey stages, community values, FAQs and opportunities.</div>
+      <div class="card-ft">
+        <span class="card-pages">24 pages</span>
+        <span class="card-cta">View Document
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M7 1l6 6-6 6" stroke="#6B5B95" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+    </article>
+    <article class="card" data-id="launch_command" data-tag="Launch" onclick="open_modal('launch_command')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')open_modal('launch_command')">
+      <div class="card-top">
+        <div class="card-ico" style="background:#FFFBEC">🚀</div>
+        <div class="card-meta">
+          <span class="card-tag" style="color:#E12020;background:#FFFBEC">Launch</span>
+          <div class="card-title">Launch Command Centre</div>
+          <div class="card-sub">Campaign Mission Control Manual</div>
+        </div>
+      </div>
+      <div class="card-div"></div>
+      <div class="card-desc">The central operating manual for the campaign launch — mission, funnel, daily priorities.</div>
+      <div class="card-ft">
+        <span class="card-pages">26 pages</span>
+        <span class="card-cta">View Document
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M7 1l6 6-6 6" stroke="#B8860B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+    </article>
+    <article class="card" data-id="readiness_checklist" data-tag="Launch" onclick="open_modal('readiness_checklist')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')open_modal('readiness_checklist')">
+      <div class="card-top">
+        <div class="card-ico" style="background:#EDF8ED">✅</div>
+        <div class="card-meta">
+          <span class="card-tag" style="color:#E12020;background:#EDF8ED">Launch</span>
+          <div class="card-title">Campaign Readiness Checklist</div>
+          <div class="card-sub">Launch Date: 23 June 2026</div>
+        </div>
+      </div>
+      <div class="card-div"></div>
+      <div class="card-desc">15-section pre-launch checklist covering everything from infrastructure to daily operations.</div>
+      <div class="card-ft">
+        <span class="card-pages">14 pages</span>
+        <span class="card-cta">View Document
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M7 1l6 6-6 6" stroke="#2E7D32" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+    </article>
+    <article class="card" data-id="partnership_prospectus" data-tag="Partnerships" onclick="open_modal('partnership_prospectus')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')open_modal('partnership_prospectus')">
+      <div class="card-top">
+        <div class="card-ico" style="background:#FEF0F4">🤲</div>
+        <div class="card-meta">
+          <span class="card-tag" style="color:#8B4B8B;background:#FEF0F4">Partnerships</span>
+          <div class="card-title">Partnership Prospectus</div>
+          <div class="card-sub">Partnership & Sponsorship Prospectus</div>
+        </div>
+      </div>
+      <div class="card-div"></div>
+      <div class="card-desc">Partnership opportunities, partner benefits, and how organisations can collaborate with NLV.</div>
+      <div class="card-ft">
+        <span class="card-pages">23 pages</span>
+        <span class="card-cta">View Document
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M7 1l6 6-6 6" stroke="#C2185B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+    </article>
+    <article class="card" data-id="constitution" data-tag="Governance" onclick="open_modal('constitution')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')open_modal('constitution')">
+      <div class="card-top">
+        <div class="card-ico" style="background:#FAF0F6">⚖️</div>
+        <div class="card-meta">
+          <span class="card-tag" style="color:#6B5B95;background:#FAF0F6">Governance</span>
+          <div class="card-title">The Constitution</div>
+          <div class="card-sub">Founding Principles of the Movement</div>
+        </div>
+      </div>
+      <div class="card-div"></div>
+      <div class="card-desc">The 15-article constitution defining the identity, values, and promises of the movement.</div>
+      <div class="card-ft">
+        <span class="card-pages">21 pages</span>
+        <span class="card-cta">View Document
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M7 1l6 6-6 6" stroke="#8B4B8B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+    </article>
+  </div>
+</main>
+
+<div class="overlay" id="ov" onclick="ov_click(event)">
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mtitle">
+    <div class="mhdr" id="mhdr">
+      <div class="mico" id="mico"></div>
+      <div class="mtitles">
+        <span class="mtag" id="mtag"></span>
+        <div class="mtitle" id="mtitle"></div>
+        <div class="msub" id="msub"></div>
+      </div>
+      <div class="mactions">
+        <a class="mbtn" id="mdownload" download title="Download PDF" aria-label="Download PDF">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1v9m0 0L4.5 6.5M8 10l3.5-3.5M2 12.5v1A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5v-1" stroke="#666" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <button class="mbtn" onclick="close_modal()" aria-label="Close">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M1 1l11 11M12 1L1 12" stroke="#666" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="mbar" id="mbar"></div>
+    <div class="mbody" id="mbody"></div>
+  </div>
+</div>
+
+<footer class="ftr">
+  <strong>Naari Led Vyapaar</strong> — A flagship initiative by The Legit Talks &nbsp;·&nbsp; Discover. Connect. Rise.
+</footer>
+
+<script>
+const CM={
+  red:{a:"#E12020",l:"#FDEAEA"},purple:{a:"#6B5B95",l:"#F0ECF9"},
+  yellow:{a:"#B8860B",l:"#FFFBEC"},green:{a:"#2E7D32",l:"#EDF8ED"},
+  pink:{a:"#C2185B",l:"#FEF0F4"},mauve:{a:"#8B4B8B",l:"#FAF0F6"}
+};
+const CARDS=[{"id": "brand_bible", "title": "Brand Bible", "subtitle": "Campaign Strategy & Brand Bible", "tag": "Strategy", "icon": "📖", "color": "red", "tagColor": "#E12020", "file": "brand-bible.pdf"}, {"id": "appendix_a", "title": "Appendix A", "subtitle": "Brand Framework & Governance Manual", "tag": "Governance", "icon": "⚙️", "color": "purple", "tagColor": "#6B5B95", "file": "appendix-a.pdf"}, {"id": "appendix_b", "title": "Appendix B", "subtitle": "50 Non-Negotiable Principles", "tag": "Culture", "icon": "🔑", "color": "yellow", "tagColor": "#B8860B", "file": "appendix-b.pdf"}, {"id": "marketing_playbook", "title": "Marketing Playbook", "subtitle": "Marketing & Execution Playbook", "tag": "Marketing", "icon": "📣", "color": "green", "tagColor": "#2E7D32", "file": "marketing-playbook.pdf"}, {"id": "asset_blueprint", "title": "Asset Blueprint", "subtitle": "Visual Identity & Content System", "tag": "Design", "icon": "🎨", "color": "pink", "tagColor": "#C2185B", "file": "asset-blueprint.pdf"}, {"id": "founder_experience", "title": "Founder Experience Blueprint", "subtitle": "Designing Lifelong Ambassadors", "tag": "Experience", "icon": "🗺️", "color": "mauve", "tagColor": "#8B4B8B", "file": "founder-experience-blueprint.pdf"}, {"id": "founder_charter", "title": "Founder Charter", "subtitle": "The Culture That Unites Us", "tag": "Founders", "icon": "🤝", "color": "red", "tagColor": "#E12020", "file": "founder-charter.pdf"}, {"id": "sop_manual", "title": "SOP Manual", "subtitle": "Campaign Operations Handbook", "tag": "Operations", "icon": "📋", "color": "purple", "tagColor": "#5C4D7D", "file": "sop-manual.pdf"}, {"id": "welcome_kit", "title": "Founder Welcome Kit", "subtitle": "Welcome to the Movement", "tag": "Founders", "icon": "🎁", "color": "yellow", "tagColor": "#E12020", "file": "founder-welcome-kit.pdf"}, {"id": "content_bible", "title": "Content Bible", "subtitle": "Storytelling System & Copy Bank", "tag": "Content", "icon": "✍️", "color": "green", "tagColor": "#B8860B", "file": "content-bible.pdf"}, {"id": "team_handbook", "title": "Internal Team Handbook", "subtitle": "Team Culture & Operational Standards", "tag": "Internal", "icon": "👥", "color": "pink", "tagColor": "#C2185B", "file": "internal-team-handbook.pdf"}, {"id": "community_playbook", "title": "365-Day Community Playbook", "subtitle": "Building India's Most Trusted Community", "tag": "Community", "icon": "🌱", "color": "mauve", "tagColor": "#2E7D32", "file": "365-day-community-playbook.pdf"}, {"id": "community_ops", "title": "Community & Event Operations", "subtitle": "Safe, Active & Meaningful Community", "tag": "Operations", "icon": "🏠", "color": "red", "tagColor": "#5C4D7D", "file": "community-event-operations.pdf"}, {"id": "founder_handbook", "title": "Founder Handbook", "subtitle": "Welcome to the Movement", "tag": "Founders", "icon": "📚", "color": "purple", "tagColor": "#E12020", "file": "founder-handbook.pdf"}, {"id": "launch_command", "title": "Launch Command Centre", "subtitle": "Campaign Mission Control Manual", "tag": "Launch", "icon": "🚀", "color": "yellow", "tagColor": "#E12020", "file": "launch-command-centre.pdf"}, {"id": "readiness_checklist", "title": "Campaign Readiness Checklist", "subtitle": "Launch Date: 23 June 2026", "tag": "Launch", "icon": "✅", "color": "green", "tagColor": "#E12020", "file": "campaign-readiness-checklist.pdf"}, {"id": "partnership_prospectus", "title": "Partnership Prospectus", "subtitle": "Partnership & Sponsorship Prospectus", "tag": "Partnerships", "icon": "🤲", "color": "pink", "tagColor": "#8B4B8B", "file": "partnership-prospectus.pdf"}, {"id": "constitution", "title": "The Constitution", "subtitle": "Founding Principles of the Movement", "tag": "Governance", "icon": "⚖️", "color": "mauve", "tagColor": "#6B5B95", "file": "the-constitution.pdf"}];
+
+let currentObjUrl = null;
+
+function open_modal(id){
+  const c=CARDS.find(x=>x.id===id);
+  if(!c)return;
+  const col=CM[c.color]||CM.red;
+  document.getElementById('mico').textContent=c.icon;
+  document.getElementById('mico').style.background=col.l;
+  document.getElementById('mtag').textContent=c.tag;
+  document.getElementById('mtag').style.cssText=`color:${c.tagColor};background:${col.l}`;
+  document.getElementById('mtitle').textContent=c.title;
+  document.getElementById('msub').textContent=c.subtitle;
+  document.getElementById('mbar').style.background=`linear-gradient(90deg,${col.a},#F4B8C8,#C2B1E1)`;
+  
+  const path = 'pdfs/' + c.file;
+  document.getElementById('mbody').innerHTML = `<iframe src="${path}#toolbar=1&navpanes=0" title="${c.title}"></iframe>`;
+  document.getElementById('mdownload').href = path;
+  document.getElementById('mdownload').setAttribute('download', c.file);
+  
+  document.getElementById('ov').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function close_modal(){
+  document.getElementById('ov').classList.remove('open');
+  document.getElementById('mbody').innerHTML = '';
+  document.body.style.overflow='';
+}
+function ov_click(e){if(e.target===document.getElementById('ov'))close_modal();}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')close_modal();});
+function filter(tag,btn){
+  document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  let v=0;
+  document.querySelectorAll('.card').forEach(card=>{
+    const show=tag==='all'||card.dataset.tag===tag;
+    card.classList.toggle('hid',!show);
+    if(show)v++;
+  });
+  document.getElementById('cnt').textContent=v===18?'18 documents':`${v} document${v!==1?'s':''}`;
+}
+</script>
+</body>
+</html>
